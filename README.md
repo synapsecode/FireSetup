@@ -10,7 +10,7 @@ It uses Python internally
 ## Installation
 * Make sure you have python installed, type python in cmd & if the python prompt opens, you can continue.
 * Git Clone this Project into a folder of your choice
-* Add This Folder's Path to your PATH environment variable on Windows
+* Add the path (where the python source code exists) to your PATH environment variable
 * Close all CMD instances and reopen and now you should be able to use firesetup from anywhere on your computer
 
 ### NOTE: 🔴🔴 Adds Firebase to Android and Web Only ❗ Add Firebase to iOS on your own
