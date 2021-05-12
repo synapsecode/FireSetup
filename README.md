@@ -26,12 +26,12 @@ cd testapp
 ### 👉 Step2: Create a Firebase Project (or) Open an Existing One
   This is very straightforward
 
-### 👉 Step3: Add an Android App
+### 👉 Step3: Add an Android App in Firebase Console
    * Follow the Steps
    * Save the google_services.json file in android/app
    * Click Next and do not proceed with editing any other files
 
-### 👉 Step4: Add Web App
+### 👉 Step4: Add Web App in Firebase Console
    * Follow the Steps
    * Copy the firebaseConfig object from the code provider by firebase and save it, you will need this later
 
