@@ -1,7 +1,6 @@
 import os
 import sys
 import argparse
-import glob
 
 def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth):
 	print(100*'=')
@@ -10,6 +9,7 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 	print("using googleClientID:", gclientid)
 	print(100*'-')
 	print("Setup Initialized")
+
 	#--------------------------------------------------------------------------------------------------
 	with open(os.path.join(directory, 'web', 'index.html'), 'w+') as f:
 		src = f.read()
@@ -44,7 +44,7 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 		).replace(
 			#Adding FirebaseBoM Dependencies
 			'implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"',
-			'implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"\n\timplementation platform(\'com.google.firebase:firebase-bom:27.1.0\')\n\timplementation \'com.google.firebase:firebase-analytics\'\n\t// For Phone SignIn\n\timplementation "androidx.browser:browser:1.2.0"'
+			'implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"\n\timplementation platform(\'com.google.firebase:firebase-bom:27.1.0\')\n\timplementation \'com.google.firebase:firebase-analytics\''
 		)
 
 		with open(os.path.join(directory, 'android', 'app', 'build.gradle'), 'w') as x:
@@ -54,11 +54,10 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 	with open(os.path.join(directory, 'pubspec.yaml')) as f:
 		src = f.read()
 		dependencies = [
-			'firebase_core: "^0.7.0"',
-			'firebase_auth: "^0.20.1"',
-			'google_sign_in: "^4.5.1"',
-			'provider: "^5.0.0"',
-			'cloud_firestore: "^0.16.0+1"',
+			'firebase_core: ^1.0.3',
+			'firebase_auth: ^1.1.0',
+			'google_sign_in: ^4.5.9',
+			'provider: ^5.0.0',
 		]
 		newsrc = src.replace(
 			'  flutter:\n    sdk: flutter',
@@ -72,8 +71,8 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 		with open(os.path.join(directory, 'pubspec.yaml')) as f:
 			src = f.read()
 			newsrc = src.replace(
-				'cloud_firestore: "^0.16.0+1"',
-				'cloud_firestore: "^0.16.0+1"\n  fireauth:'
+				'provider: ^5.0.0',
+				'provider: ^5.0.0\n  fireauth:'
 			)
 			with open(os.path.join(directory, 'pubspec.yaml'), 'w') as x:
 				x.write(newsrc)
@@ -107,6 +106,8 @@ if(__name__ == '__main__'):
 	directory = args.directory
 	gclientid = args.gclientid
 	enable_fireauth = True if args.enable_fireauth == "True" else False
+
+	print(cloc)
 
 	project_name = directory.split('\\')[-1]
 
