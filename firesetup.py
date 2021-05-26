@@ -54,8 +54,8 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 	with open(os.path.join(directory, 'pubspec.yaml')) as f:
 		src = f.read()
 		dependencies = [
-			'firebase_core: ^1.0.3',
-			'firebase_auth: ^1.1.0',
+			'firebase_core: ^0.7.0',
+			'firebase_auth: ^0.20.1',
 			'google_sign_in: ^4.5.9',
 			'provider: ^5.0.0',
 		]
