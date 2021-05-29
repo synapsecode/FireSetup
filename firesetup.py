@@ -54,9 +54,9 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 	with open(os.path.join(directory, 'pubspec.yaml')) as f:
 		src = f.read()
 		dependencies = [
-			'firebase_core: ^0.7.0',
-			'firebase_auth: ^0.20.1',
-			'google_sign_in: ^4.5.9',
+			'firebase_core: ^1.2.0',
+			'firebase_auth: ^1.2.0',
+			'google_sign_in: ^5.0.4',
 			'provider: ^5.0.0',
 		]
 		newsrc = src.replace(
@@ -72,7 +72,7 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 			src = f.read()
 			newsrc = src.replace(
 				'provider: ^5.0.0',
-				'provider: ^5.0.0\n  fireauth: 0.0.4'
+				'provider: ^5.0.0\n  fireauth: 0.0.5'
 			)
 			with open(os.path.join(directory, 'pubspec.yaml'), 'w') as x:
 				x.write(newsrc)
