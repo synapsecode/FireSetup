@@ -38,7 +38,7 @@ cd testapp
 
 ### 👉 Step4: Add Web App in Firebase Console
    * Follow the Steps
-   * Copy the firebaseConfig object from the code provider by firebase and save it, you will need this later
+   * Copy the firebaseConfig object from the code provided by firebase and save it, you will need this later
 
 ### 👉 Step 5: Get your GoogleSignIn ClientID (Optional if you do not want GoogleSignIn)
   * Go to the [Google Cloud Platform Console](https://console.cloud.google.com)
