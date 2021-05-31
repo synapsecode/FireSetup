@@ -25,7 +25,7 @@ It uses Python internally
 
 ## Steps To Use FireSetup
 
-### 👉 Step 1: Create a flutter project
+### 🟡 Step 1: Create a flutter project
 ```batch
 flutter create testapp
 cd testapp
@@ -33,14 +33,14 @@ cd testapp
 
 ---
 
-### 👉 Step 2: Create a Firebase Project (or) Open an Existing One
+### 🟡 Step 2: Create a Firebase Project (or) Open an Existing One
   ```
   Use the Firebase Console to do this! It's very straightforward
   ```
   
  ---
  
-### 👉 Step 3: Add an Android App in Firebase Console
+### 🟡 Step 3: Add an Android App in Firebase Console
   ```
   ○ Register the App
   ○ Save the google_services.json file in android/app
@@ -49,7 +49,7 @@ cd testapp
 
 ---
 
-### 👉 Step 4: Add Web App in Firebase Console
+### 🟡 Step 4: Add Web App in Firebase Console
   ```
   ○ Register the App
   ○ From the code snippet provided by firebase, just copy the firebaseConfig object and save it somewhere
@@ -58,7 +58,7 @@ cd testapp
  
 ---
 
-### 👉 Step 5: Run FireSetup
+### 🟡 Step 5: Run FireSetup
   * Inside your flutter project, open cmd and enter this command (assuming you have installed FireSetup Correctly):
 
   ```batch
@@ -68,14 +68,14 @@ cd testapp
   * The **-gcid** flag is useful for GoogleSignIn on the Web (optional)
   * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth (optional)
 
-### 👉 Step 5.1: Add firebaseConfig to Web
+### 🟡 Step 5.1: Add firebaseConfig to Web
   ```
   ○ Open the flutter project using an IDE like VSCode for example
   ○ Go to the /web/index.html file and replace the firebaseConfig object there with the one you copied when adding the webApp
   ```
 ---
 
-### 👉 Step 6: Enable Authentication Methods
+### 🟡 Step 6: Enable Authentication Methods
 - Head over to the Authentication Section of your Firebase Project's Console
 - Click on Get Started
 - Go to the SignIn Method Tab
