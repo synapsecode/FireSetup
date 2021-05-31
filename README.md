@@ -1,44 +1,88 @@
 <img src="https://i.ibb.co/9b9sbQS/New-Project.png" align="right">
 
 
-# Flutter FireSetup Utility
+# Flutter FireSetup Utility (0.0.5)
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 As a bonus, you can integrate my [FireAuth](https://github.com/synapsecode/fireauth) package effortlessly by using this script.
 It uses Python internally
 
 <br>
 
+> **🔴🔴🔴 NOTE: FireSetup Limitations**  
+> As of now, FireSetup is able to add Firebase only to Android & Web Apps, You must add Firebase to iOS on your own.
+
 ## System Requirements
 * Windows 10
-* Python 3.7.1 and above
+* Python 3 (if not, please install python3)
 
-## Installation
+## FireSetup OneTime Installation
 * Make sure you have python installed, type python in cmd & if the python prompt opens, you can continue.
 * Git Clone this Project into a folder of your choice
-* Add the path (where the python source code exists) to your PATH environment variable
-* Close all CMD instances and reopen and now you should be able to use firesetup from anywhere on your computer
+* cd into this folder, copy the folder path and add it to your PATH environment variable
+* Close all CMD instances and reopen and now you should be able to use firesetup from anywhere on your computer.
+* To Test FireSetup, open any random directory from cmd and run the command firesetup, If you see an output, that means it works!
 
-### NOTE: 🔴🔴 Adds Firebase to Android and Web Only ❗ Add Firebase to iOS on your own
 
-## Usage
+## Steps To Use FireSetup
 
-### 👉 Step1: Create a flutter project
+### 👉 Step 1: Create a flutter project
 ```batch
 flutter create testapp
 cd testapp
 ```
 
-### 👉 Step2: Create a Firebase Project (or) Open an Existing One
-  This is very straightforward
+---
 
-### 👉 Step3: Add an Android App in Firebase Console
-   * Follow the Steps
-   * Save the google_services.json file in android/app
-   * Click Next and do not proceed with editing any other files
+### 👉 Step 2: Create a Firebase Project (or) Open an Existing One
+  ```
+  Use the Firebase Console to do this! It's very straightforward
+  ```
+  
+ ---
+ 
+### 👉 Step 3: Add an Android App in Firebase Console
+  ```
+  ○ Register the App
+  ○ Save the google_services.json file in android/app
+  ○ Click Next and do not proceed with editing any other files as This will be done by FireSetup
+  ```
 
-### 👉 Step4: Add Web App in Firebase Console
-   * Follow the Steps
-   * Copy the firebaseConfig object from the code provided by firebase and save it, you will need this later
+---
+
+### 👉 Step 4: Add Web App in Firebase Console
+  ```
+  ○ Register the App
+  ○ From the code snippet provided by firebase, just copy the firebaseConfig object and save it somewhere
+  ○ Click Next and do not proceed with editing any other files as This will be done by FireSetup
+  ```
+ 
+---
+
+### 👉 Step 5: Run FireSetup
+  * Inside your flutter project, open cmd and enter this command (assuming you have installed FireSetup Correctly):
+
+  ```batch
+  firesetup -gcid="<YOUR_GOOGLE_SIGNIN_CLIENTID>" -efa="True"
+  ```
+  
+  * The **-gcid** flag is useful for GoogleSignIn on the Web (optional)
+  * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth (optional)
+
+### 👉 Step 5.1: Add firebaseConfig to Web
+  ```
+  ○ Open the flutter project using an IDE like VSCode for example
+  ○ Go to the /web/index.html file and replace the firebaseConfig object there with the one you copied when adding the webApp
+  ```
+---
+
+### 👉 Step 6: Enable Authentication Methods
+- Head over to the Authentication Section of your Firebase Project's Console
+- Click on Get Started
+- Go to the SignIn Method Tab
+- Enable whichever Auth Provider you need!
+
+---
+
 
 ### 👉 Step 5: Get your GoogleSignIn ClientID (Optional if you do not want GoogleSignIn)
   * Go to the [Google Cloud Platform Console](https://console.cloud.google.com)
@@ -46,20 +90,6 @@ cd testapp
   * Open the GCP Project with the same name as your firebase project
   * Search Credentials in the Search Box and click on API Credentials
   * Copy the webClientID under OAuth 2.0 Client IDs
-
-### 👉 Step 6: Using FireSetup
-  * Inside your flutter project, open cmd and enter this command (assuming you have installed FireSetup Correctly):
-
-  ```batch
-  firesetup -gcid="GOOGLE_SIGNIN_CLIENTID" -efa="True"
-  ```
-  
-  * The **-gcid** flag is useful for GoogleSignIn on the Web (optional)
-  * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth (optional)
-
-### 👉 Step 6.1:  Step Add firebaseConfig to Web
-  * Open the flutter app using an IDE like VSCode for example
-  * Go to the /web/index.html file and replace the firebaseConfig object there with the one you copied when adding the webApp
 
 ### 👉 Step 7: Add SHA-1 & SHA-256 Keys to Firebase Android App
   * Go to your /android folder in the flutter project, open terminal and type this:
