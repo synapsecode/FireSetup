@@ -65,8 +65,8 @@ cd testapp
   firesetup -gcid="<YOUR_GOOGLE_SIGNIN_CLIENTID>" -efa="True"
   ```
   
-  * The **-gcid** flag is useful for GoogleSignIn on the Web (optional)
-  * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth (optional)
+  * The **-gcid** flag is useful for GoogleSignIn on the Web **(optional)**
+  * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth **(optional)**
 
 ### 🟡 Step 5.1: Add firebaseConfig to Web
   ```
