@@ -3,12 +3,21 @@ import sys
 import argparse
 
 def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth):
-	print(100*'=')
-	print("Flutter Firebase Setup Utility v1.0!")
+	print(75*'=')
+	print("Flutter Firebase Setup Utility v0.0.5!")
 	print(f"Executing FireSetup on Flutter Project: {project_name}")
 	print("using googleClientID:", gclientid)
-	print(100*'-')
-	print("Setup Initialized")
+
+	# Check if FireSetup is in a Flutter Project
+	if(not os.path.exists(os.path.join(directory, 'pubspec.yaml'))):
+		print(75*'-')
+		print("Fatal Error: FireSetup is not Inside a Flutter Project")
+		print("Please run the FireSetup Command in a Flutter Project directory")
+		print(75*'-')
+		return
+	else:
+		print(75*'-')
+
 
 	#--------------------------------------------------------------------------------------------------
 	with open(os.path.join(directory, 'web', 'index.html'), 'w+') as f:
@@ -83,15 +92,15 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 				f.write(x.read())
 		print("Replaced main.dart with FireAuth Example")
 	#--------------------------------------------------------------------------------------------------	
-	print(100*'-')
+	print(75*'-')
 	print("Firebase Setup Done!")
-	print(100*'=')
+	print(75*'=')
 	print("Final Steps")
 	print("Replace the placeholder firebaseConfig object in web/index.html")
 	print(" with the one you copied from Add Firebase Web App Operation")
-	print("Please Enable Google Authentication in your Firebase Auth Console")
+	print("Please Enable the Required AuthenticationMethods in your Firebase Auth Console")
 	print("run flutter pub get, write some code and then run the application")
-	print(100*'=')
+	print(75*'=')
 
 
 if(__name__ == '__main__'):
@@ -106,8 +115,6 @@ if(__name__ == '__main__'):
 	directory = args.directory
 	gclientid = args.gclientid
 	enable_fireauth = True if args.enable_fireauth == "True" else False
-
-	print(cloc)
 
 	project_name = directory.split('\\')[-1]
 
