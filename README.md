@@ -80,38 +80,49 @@ cd testapp
 - Click on Get Started
 - Go to the SignIn Method Tab
 - Enable whichever Auth Provider you need!
+---
+
+Now, the basic setup is complete! You can use AnonymousSignIn and Mail SignIn directly provided you have enabled them in the Firebase Console.
+To use Google SignIn, Phone SignIn and others, you need a bit more setup
+After Enabling the respective authentication methods, follow these steps!
 
 ---
 
-
-### 👉 Step 5: Get your GoogleSignIn ClientID (Optional if you do not want GoogleSignIn)
+### 🟢 GoogleSignIn Additional Setup
+  #### A) Get the GoogleSignInClientID
   * Go to the [Google Cloud Platform Console](https://console.cloud.google.com)
   * Login With the Same Google Account used for Firebase
   * Open the GCP Project with the same name as your firebase project
   * Search Credentials in the Search Box and click on API Credentials
   * Copy the webClientID under OAuth 2.0 Client IDs
+  * Go to /web/index.html and replace the placeholder string GCLIENTID with the copied clientID!
 
-### 👉 Step 7: Add SHA-1 & SHA-256 Keys to Firebase Android App
+  #### B) Add the SHA-1 and SHA-256 Keys to Firebase
   * Go to your /android folder in the flutter project, open terminal and type this:
 
   ```batch
    gradlew signingReport
   ```
-  
-  now, copy the SHA1 and SHA-256 Keys, store it for later use and add it to your Firebase Project
-  
-### 👉 Step 8: (If Enabled FireAuth) Enable Authentication Methods
-  * Go to your Firebase Console > Authentication
-  * Go to SignIn Methods
-  * Enable all the Authentication methods you need, FireAuth supports (Google, Anonymous, Email&Password, Phone)
+  * now, copy the SHA1 and SHA-256 Keys and store it somewhere.
+  * Go to your firebase android app's settings in the [Firebase Console](https://console.firebase.google.com/)
+  * Scroll to the bottom to 'SHA certificate fingerprints'
+  * Click On 'Add Fingerprint' and add both the Keys. Done!
 
-### 👉 Step 9: (If enabled FireAuth & Using PhoneAuth) Remove Android ReCaptcha Verification
+---
+
+### 🟢 PhoneSignIn Additional Setup
+  #### A) Add the SHA-1 & SHA-256 Keys (process shown above)
+  
+  #### B) Remove Android ReCaptcha Verification
   * Open your GCP Project (similar way as previously done)
   * search for Android Device Verification
-  * Enable the API
+  * Enable the API and done!
 
-### 👉 Step 10: Testing
+--- 
+
+### 🔵 Testing
   * Firstly, Get all the newly added packages
+  * Write Some Code
 
     ```
     flutter pub get
