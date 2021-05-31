@@ -89,7 +89,7 @@ After Enabling the respective authentication methods, follow these steps!
 ---
 
 ### 🟢 GoogleSignIn Additional Setup
-  #### A) Get the GoogleSignInClientID
+  #### A) Get the GoogleSignInClientID (For FlutterWeb only)
   * Go to the [Google Cloud Platform Console](https://console.cloud.google.com)
   * Login With the Same Google Account used for Firebase
   * Open the GCP Project with the same name as your firebase project
