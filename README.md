@@ -1,7 +1,7 @@
 <img src="https://i.ibb.co/9b9sbQS/New-Project.png" align="right">
 
 
-# Flutter FireSetup Utility (0.0.5)
+# Flutter FireSetup Utility (0.2.0)
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 As a bonus, you can integrate my [FireAuth](https://github.com/synapsecode/fireauth) package effortlessly by using this script.
 It uses Python internally
@@ -82,6 +82,21 @@ cd testapp
 - Enable whichever Auth Provider you need!
 ---
 
+### 🔵 Testing
+  * Firstly, Get all the newly added packages
+  * Write Some Code
+
+    ```
+    flutter pub get
+    ```
+  * Run the Application
+
+    ```
+    flutter run -d chrome (For Flutter Web)
+    flutter run -d <device_identifier> (For Flutter Native)
+    ```
+---
+
 Now, the basic setup is complete! You can use AnonymousSignIn and Mail SignIn directly provided you have enabled them in the Firebase Console.
 To use Google SignIn, Phone SignIn and others, you need a bit more setup
 After Enabling the respective authentication methods, follow these steps!
@@ -119,18 +134,3 @@ After Enabling the respective authentication methods, follow these steps!
   * Enable the API and done!
 
 --- 
-
-### 🔵 Testing
-  * Firstly, Get all the newly added packages
-  * Write Some Code
-
-    ```
-    flutter pub get
-    ```
-  * Run the Application
-
-    ```
-    flutter run -d chrome (For Flutter Web)
-    flutter run -d <device_identifier> (For Flutter Native)
-    ```
-   
