@@ -4,7 +4,7 @@ import argparse
 
 def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth):
 	print(75*'=')
-	print("Flutter Firebase Setup Utility v0.0.5!")
+	print("Flutter Firebase Setup Utility v0.1.0!")
 	print(f"Executing FireSetup on Flutter Project: {project_name}")
 	print("using googleClientID:", gclientid)
 
@@ -42,18 +42,27 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 	with open(os.path.join(directory, 'android', 'app', 'build.gradle')) as f:
 		src = f.read()
 
+		implementations = [
+			"implementation platform('com.google.firebase:firebase-bom:27.1.0')",
+			"implementation 'com.google.firebase:firebase-analytics'",
+			"implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'"
+		]
+
+		gservices = [
+			"apply plugin: 'com.google.gms.google-services'",
+		]
+
 		newsrc = src.replace(
 			#Changing MinimumSDKVersion to 21
-			'minSdkVersion 16',
-			'minSdkVersion 21'
+			'minSdkVersion 16', 'minSdkVersion 21'
 		).replace(
 			#Applying GoogleServices
 			'apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"',
-			'apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"\napply plugin: \'com.google.gms.google-services\''
+			'apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"\n' + '\n'.join(gservices)
 		).replace(
 			#Adding FirebaseBoM Dependencies
 			'implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"',
-			'implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"\n\timplementation platform(\'com.google.firebase:firebase-bom:27.1.0\')\n\timplementation \'com.google.firebase:firebase-analytics\''
+			'implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"\n\t' + '\n\t'.join(implementations),
 		)
 
 		with open(os.path.join(directory, 'android', 'app', 'build.gradle'), 'w') as x:
