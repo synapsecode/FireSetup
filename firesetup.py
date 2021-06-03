@@ -90,7 +90,7 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 			src = f.read()
 			newsrc = src.replace(
 				'provider: ^5.0.0',
-				'provider: ^5.0.0\n  fireauth: 0.0.5'
+				'provider: ^5.0.0\n  fireauth: 0.2.0'
 			)
 			with open(os.path.join(directory, 'pubspec.yaml'), 'w') as x:
 				x.write(newsrc)

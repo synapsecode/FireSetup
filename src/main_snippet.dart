@@ -1,3 +1,4 @@
+import 'package:fireauth/social.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 //Import FireAuth
@@ -16,7 +17,7 @@ class FireAuthExampleApp extends StatelessWidget {
   Widget build(BuildContext context) {
     //Always add this above the MaterialApp, it Exposes a Provider Internally
     //That can be used to access the AuthInformation from Anywhere
-    return GlobalFirebaseAuthenticationProvider(
+    return FireAuth(
       child: MaterialApp(
         home: AppOrigin(),
       ),
@@ -31,7 +32,7 @@ class AppOrigin extends StatelessWidget {
   Widget build(BuildContext context) {
     //This basically acts like a Gateway, If youre logged in, it shows destination
     //If youre not logged in, it shows login (Remembers the Authentication State too!)
-    return AuthenticationManager(
+    return AuthManager(
       loginFragment: LoginPage(),
       destinationFragment: HomePage(),
       //Other Arguements are for Setting up WaitingScreen during login and are optional
@@ -73,6 +74,61 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(height: 20),
+              Text(
+                "Social Login",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              ),
+              SizedBox(height: 20),
+              //FireAuth Provided TwitterSignInButton
+              TwitterSignInButton(
+                onError: (e) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("TwitterOAuth Error Occured"),
+                      content: Text(e),
+                    ),
+                  );
+                },
+              ),
+              //Incase you want to make a new Button for TwitterSignInButton, you can use this method:
+              /*
+              AuthController.signInWithTwiter(
+                context,
+                signInWithRedirect: false,
+                enableWaitingScreen: false,
+                onError: (String e) {
+                  print(e);
+                },
+              ),
+              */
+              SizedBox(height: 8),
+              GithubSignInButton(
+                onError: (e) {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: Text("GithubOAuth Error Occured"),
+                      content: Text(e),
+                    ),
+                  );
+                },
+              ),
+              //Incase you want to make a new Button for GithubSignInButton, you can use this method:
+              /*
+              AuthController.signInWithGithub(
+                context,
+                signInWithRedirect: false,
+                enableWaitingScreen: false,
+                onError: (String e) {
+                  print(e);
+                },
+              ),
+              */
+              SizedBox(height: 8),
               //FireAuth Provided GoogleSignInButton
               GoogleSignInButton(
                 //If you want a waiting screen when GoogleSignIn is ongoing
@@ -88,6 +144,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   );
                 },
+                //Callback for a Successful SignIn
+                onSignInSuccessful: (user) {
+                  print(
+                    "Google SignIn Successful!!! Name: ${user.displayName}",
+                  );
+                },
               ),
               //Incase you want to make a new Button for GoogleSignIn, you can use this method:
               /*
@@ -100,10 +162,16 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               */
-              SizedBox(height: 20),
+              SizedBox(height: 8),
               //FireAuth Provided AnonymousSignInButton you can customize the colors if needed
               AnonymousSignInButton(
                 enableWaitingSceeen: false,
+                //Callback for a Successful SignIn
+                onSignInSuccessful: (user) {
+                  print(
+                    "Anonymous SignIn Successful!!! UID: ${user.uid}",
+                  );
+                },
               ),
               //Incase you want your own AnonymousSignInButton then use this method:
               /*
@@ -112,6 +180,14 @@ class _LoginPageState extends State<LoginPage> {
                   enableWaitingScreen: false,
                 ),
               */
+              SizedBox(height: 30),
+              Text(
+                "Phone Authentication",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 30,
+                ),
+              ),
               SizedBox(height: 20),
               Container(
                 padding: EdgeInsets.all(10),
@@ -158,6 +234,13 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             );
                           },
+                          closeVerificationPopupAfterSubmit: false,
+                          //Callback for a Successful SignIn
+                          onSignInSuccessful: (user) {
+                            print(
+                              "PhoneSignIn Successful!!! Phone: ${user.phoneNumber}",
+                            );
+                          },
                         );
                       },
                       foregroundColor: Colors.white,
@@ -176,7 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 15,
               ),
               Container(
                 color: Colors.white,
@@ -211,6 +294,10 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             );
                           },
+                          onRegisterSuccessful: (user) {
+                            print(
+                                "Successfully Registered Email: ${user.email}");
+                          },
                         );
                       },
                       child: Text("Register & Login"),
@@ -227,7 +314,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 15,
               ),
               Container(
                 color: Colors.white,
@@ -272,6 +359,12 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             );
                           },
+                          //Callback for a Successful SignIn
+                          onSignInSuccessful: (user) {
+                            print(
+                              "Email SignIn Successful!!! Email: ${user.email}",
+                            );
+                          },
                         );
                       },
                       child: Text("Login"),
@@ -283,11 +376,14 @@ class _LoginPageState extends State<LoginPage> {
               // Use AuthController.logout(context) to logout from anywhere
               GenericSignInButton(
                 name: 'Logout',
-                initiator: (context) => AuthController.logout(context),
+                initiator: (context) => AuthController.logout(
+                  context,
+                ),
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.red[700],
                 customString: 'Logout',
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),
@@ -309,14 +405,19 @@ class HomePage extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.logout),
             onPressed: () {
-              AuthController.logout(context);
+              AuthController.logout(
+                context,
+                onLogout: () {
+                  print("Logout Successful");
+                },
+              );
             },
           ),
+
           IconButton(
             icon: Icon(Icons.person),
-            onPressed: () {
+            onPressed: () async {
               print(
-                //Use this to get the currentUser
                 AuthController.getCurrentUser(
                   context,
                   //Use the customMapping arguement to create your own User Representation from Firebase User
@@ -330,7 +431,6 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: Text("Home"),
     );
   }
 }
