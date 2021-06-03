@@ -98,7 +98,7 @@ cd testapp
 ---
 
 Now, the basic setup is complete! You can use AnonymousSignIn and Mail SignIn directly provided you have enabled them in the Firebase Console.
-To use Google SignIn, Phone SignIn and others, you need a bit more setup
+To use Google SignIn, Phone SignIn and others, you need some additional setup!
 After Enabling the respective authentication methods, follow these steps!
 
 ---
