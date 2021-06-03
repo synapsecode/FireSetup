@@ -1,7 +1,7 @@
 <img src="https://i.ibb.co/9b9sbQS/New-Project.png" align="right">
 
 
-# Flutter FireSetup Utility (0.2.0)
+# Flutter FireSetup Utility (0.3.0)
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 As a bonus, you can integrate my [FireAuth](https://github.com/synapsecode/fireauth) package effortlessly by using this script.
 It uses Python internally
@@ -84,27 +84,29 @@ cd testapp
 
 ### 🔵 Testing
   * Firstly, Get all the newly added packages
-  * Write Some Code
-
     ```
     flutter pub get
     ```
+  * Write Some Code
   * Run the Application
 
     ```
     flutter run -d chrome (For Flutter Web)
     flutter run -d <device_identifier> (For Flutter Native)
     ```
+    
 ---
 
+## Additional Setup Instructions
 Now, the basic setup is complete! You can use AnonymousSignIn and Mail SignIn directly provided you have enabled them in the Firebase Console.
-To use Google SignIn, Phone SignIn and others, you need some additional setup!
-After Enabling the respective authentication methods, follow these steps!
+To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow the Steps given in each Section!
 
----
 
-### 🟢 GoogleSignIn Additional Setup
-  #### A) Get the GoogleSignInClientID (For FlutterWeb only)
+<details><summary>🟢 Google</summary>
+  
+  #### A) Enable the Google AuthProvider on the Firebase Console
+
+  #### B) Get the GoogleSignInClientID (For FlutterWeb only)
   * Go to the [Google Cloud Platform Console](https://console.cloud.google.com)
   * Login With the Same Google Account used for Firebase
   * Open the GCP Project with the same name as your firebase project
@@ -112,7 +114,7 @@ After Enabling the respective authentication methods, follow these steps!
   * Copy the webClientID under OAuth 2.0 Client IDs
   * Go to /web/index.html and replace the placeholder string GCLIENTID with the copied clientID!
 
-  #### B) Add the SHA-1 and SHA-256 Keys to Firebase
+  #### C) Add the SHA-1 and SHA-256 Keys to Firebase
   * Go to your /android folder in the flutter project, open terminal and type this:
 
   ```batch
@@ -122,20 +124,25 @@ After Enabling the respective authentication methods, follow these steps!
   * Go to your firebase android app's settings in the [Firebase Console](https://console.firebase.google.com/)
   * Scroll to the bottom to 'SHA certificate fingerprints'
   * Click On 'Add Fingerprint' and add both the Keys. Done!
-
----
-
-### 🟢 PhoneSignIn Additional Setup
-  #### A) Add the SHA-1 & SHA-256 Keys (process shown above)
   
-  #### B) Remove Android ReCaptcha Verification
+---
+</details>
+
+<details><summary>🟢 Phone</summary>
+  
+  #### A) Enable the Phone AuthProvider on the Firebase Console and click on Save
+  
+  #### B) Add the SHA-1 & SHA-256 Keys (process shown above)
+  
+  #### C) Remove Android ReCaptcha Verification
   * Open your GCP Project (similar way as previously done)
   * search for Android Device Verification
   * Enable the API and done!
 
---- 
+---
+</details>
 
-### 🟢 Twitter OAuth Additional Setup
+<details><summary>🟢 Twitter (OAuth)</summary>
 
 #### A) Create Twitter OAuth App
 - Go to the [Twitter Developer Console](https://developer.twitter.com/en/portal/projects-and-apps)
@@ -152,9 +159,11 @@ After Enabling the respective authentication methods, follow these steps!
 - Enable 3-legged-oauth
 - Paste the previously copied callbackURL in the respective field and also pass your website link in the respective field and click on save!
 - And the Twitter OAuth SignIn Setup is Done!
----
 
-### 🟢 Github OAuth Additional Setup
+---
+</details>
+
+<details><summary>🟢 Github (OAuth)</summary>
 
 #### A) Enable the Github SignIn Provider on the Firebase Console
 - Keep the Dialog Open and just copy the provided callbackURL
@@ -170,4 +179,12 @@ After Enabling the respective authentication methods, follow these steps!
 - Go back to the open dialog on the Firebase Console
 - Paste the ClientID & Client Secret in their respective fields and click on Save!
 - And the Github OAuth SignIn Setup is Done!
+  
+---
+</details>
+
+<details><summary>🟢 Microsoft (OAuth)</summary>
+  
+</details> 
+
 ---
