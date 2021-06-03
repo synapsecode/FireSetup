@@ -138,7 +138,7 @@ After Enabling the respective authentication methods, follow these steps!
 ### 🟢 Twitter OAuth Additional Setup
 
 #### A) Create Twitter OAuth App
-Go to the [Twitter Developer Console](https://developer.twitter.com/en/portal/projects-and-apps)
+- Go to the [Twitter Developer Console](https://developer.twitter.com/en/portal/projects-and-apps)
 - Scroll Down and click on Create App
 - Then Enter your App Name, copy the API Key, API Secret Key and the Bearer Token and save it somewhere
 
@@ -151,9 +151,23 @@ Go to the [Twitter Developer Console](https://developer.twitter.com/en/portal/pr
 - Go to the Settings of your Twitter App on the Developer Console, Scroll Down to Authentication Settings and click on Edit
 - Enable 3-legged-oauth
 - Paste the previously copied callbackURL in the respective field and also pass your website link in the respective field and click on save!
-- And the Twitter SignIn Setup is Done!
+- And the Twitter OAuth SignIn Setup is Done!
 ---
 
 ### 🟢 Github OAuth Additional Setup
 
+#### A) Enable the Github SignIn Provider on the Firebase Console
+- Keep the Dialog Open and just copy the provided callbackURL
+
+#### B) Create Github OAuth App
+- Go to the [Gitbub Developer Settings](https://github.com/settings/developers) and click on New OAuth App
+- Fill in the Details and paste the previously copied CallbackURL in the respective field and submit
+- Now you will be on a App Dashboard, Copy the ClientID and save it somewhere
+- Click on Generate New Client Secret and save it somewhere
+- Update any other required fields and click on Update Application
+
+#### C) Final Step
+- Go back to the open dialog on the Firebase Console
+- Paste the ClientID & Client Secret in their respective fields and click on Save!
+- And the Github OAuth SignIn Setup is Done!
 ---
