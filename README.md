@@ -134,3 +134,26 @@ After Enabling the respective authentication methods, follow these steps!
   * Enable the API and done!
 
 --- 
+
+### 🟢 Twitter OAuth Additional Setup
+
+#### A) Create Twitter OAuth App
+Go to the [Twitter Developer Console](https://developer.twitter.com/en/portal/projects-and-apps)
+- Scroll Down and click on Create App
+- Then Enter your App Name, copy the API Key, API Secret Key and the Bearer Token and save it somewhere
+
+#### B) Enable the TwitterSignIn AuthProvider on the Firebase Console
+- Enable the Twitter SignIn Provider in the Firebase Console
+- Copy the API Key & the API Secret that you saved before and paste it in the respective fields
+- Copy the CallbackURL that is provided under the API Key & API Secret Fields
+
+#### C) Enable 3-legged-OAuth
+- Go to the Settings of your Twitter App on the Developer Console, Scroll Down to Authentication Settings and click on Edit
+- Enable 3-legged-oauth
+- Paste the previously copied callbackURL in the respective field and also pass your website link in the respective field and click on save!
+- And the Twitter SignIn Setup is Done!
+---
+
+### 🟢 Github OAuth Additional Setup
+
+---
