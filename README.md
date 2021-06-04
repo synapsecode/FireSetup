@@ -185,6 +185,27 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
 
 <details><summary>🟢 Microsoft (OAuth)</summary>
   
+#### A) Enable the Microsoft SignIn Provider on the Firebase Console
+- Keep the Dialog Open and just copy the provided redirectURL
+  
+#### B) Create an Microsoft Azure AD Application
+- Open [MSFT Azure Portal](https://portal.azure.com/) and Sign in, You will be then redirected to the Azure Homepage
+- Click on the Hamburger Icon on the Left to Reveal the Sidebar and then click on 'Azure Active Directory'
+- Now, Click on 'App Registrations' in the Sidebar present on that Window
+- Now, Click on the 'New Registration' Button on the top and Fill in the details
+- Under the 'Supported Account Types' Heading Select the Option for 'Accounts in any organizational directory (Any Azure AD directory - Multitenant) and personal Microsoft accounts (e.g. Skype, Xbox)'
+- Under the Redirect URI Heading, Select Web and paste the CallbackURL that you copied from the Firebase Console Dialog Earlier.
+- After about a Minute, Your App's Dashboard will be visible Copy the 'Application (client) ID' and Save it somewhere, this will be needed later.
+  
+#### C) Generate a new Azure Client Secret
+- In the Same Page, Under the 'Manage' heading, click on 'Certificates and Secrets' and in the page that opens, Click on 'New Client Secret'
+- Fill In the Details and once created, copy the String under the 'Value' Heading and save it somewhere, this is your Client Secret.
+  
+#### D) Complete the Firebase AuthProvider Setup
+- Now go back to the Microsoft AuthProvider Dialog and paste the Application (client) ID and the Client Secret in the required fields and Click on Save!
+- The Setup is Done! Now you can use Microsoft Authentication!
+  
+  
 </details> 
 
 ---
