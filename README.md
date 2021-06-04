@@ -132,7 +132,7 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
   
   #### A) Enable the Phone AuthProvider on the Firebase Console and click on Save
   
-  #### B) Add the SHA-1 & SHA-256 Keys (process shown above)
+  #### B) Add the SHA-1 & SHA-256 Keys (process shown in Google's Additional Setup)
   
   #### C) Remove Android ReCaptcha Verification
   * Open your GCP Project (similar way as previously done)
