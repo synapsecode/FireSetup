@@ -6,6 +6,7 @@ import os
 import sys
 import argparse
 import updater
+import subprocess
 
 SCC = 75 #SeperatorCharacterCount
 
@@ -234,8 +235,9 @@ def fireupdate(cdir):
 		updater.replace_file(os.path.join(cdir, 'updater.py'), raw_updater)
 		print("Updated the UpdateEngine")
 		print("Shifting Control from FireSetup -> UpdateEngine")
-		#Close this & Hand over to updater.py
-		pass
+		#HandOver Execution to UpdateEngine & Close this File
+		subprocess.run(f'python updater.py "{cdir}" update', shell=True)
+		exit()
 	else:
 		print("No Update Available")
 	print(SCC*'-')

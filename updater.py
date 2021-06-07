@@ -38,20 +38,26 @@ def perform_update(cdir):
 	# replace_file(os.path.join(cdir, 'README.md'), raw_readme)
 	# replace_file(os.path.join(cdir, 'firesetup.bat'), raw_fs_bat)
 	# replace_file(os.path.join(cdir, 'firesetup.py'), raw_fs_py)
-	# version = 
-	print(f"Update Successful! FireSetup has been updated from version: ({VERSION_NUMBER}) to version: {version}")
+	print(f"Update Successful! FireSetup has been updated from ({VERSION_NUMBER}) -> {version}")
 
 if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
 	parser.add_argument('cdir', help="Current Directory", type= str)
+	parser.add_argument('mode', help="Updater Mode", type=str)
 	args = parser.parse_args()
 	cdir = args.cdir
+	mode = args.mode
 
-	print("Runnning Update in Path:", cdir)
-
-	if(is_update_available()):
-		print(75*'-')
-		print("FireSetup: Update is Available!")
-		print("Execute the Command: 'firesetup update' to Update FireSetup")
-		print(75*'-')
-		perform_update(cdir)
+	if(mode == 'update'):
+		if(is_update_available()):
+			print(75*'-')
+			perform_update(cdir)
+			print(75*'-')
+	elif(mode == 'check'):
+		if(is_update_available()):
+			print(75*'-')
+			print("FireSetup: Update is Available!")
+			print("Execute the Command: 'firesetup update' to Update FireSetup")
+			print(75*'-')
+	else:
+		print("Invalid Mode")
