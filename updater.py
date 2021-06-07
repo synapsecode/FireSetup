@@ -1,3 +1,5 @@
+#UPDATED
+
 from firesetup import VERSION_NUMBER
 import requests
 import os
@@ -54,5 +56,8 @@ if(__name__ == '__main__'):
 		print("FireSetup: Update is Available!")
 		print("Execute the Command: 'firesetup update' to Update FireSetup")
 		print(75*'-')
+<<<<<<< HEAD
 
 		perform_update(cdir)
+=======
+>>>>>>> 8a40238aecf5ce89ed3986505934860756bedd08
