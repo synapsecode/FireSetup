@@ -1,3 +1,4 @@
+#Latest Update
 from firesetup import VERSION_NUMBER
 import requests
 import os
