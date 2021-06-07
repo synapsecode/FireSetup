@@ -1,5 +1,5 @@
 #Global Constants
-VERSION_NUMBER = "0.4.0"
+VERSION_NUMBER = "0.3.0"
 
 #Imports
 import os
@@ -19,7 +19,6 @@ def is_flutter_project(directory):
 	return (pubspec_check and android_check)
 
 def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth):
-	print('\n' + SCC*'-')
 	print(f"FireSetup(v{VERSION_NUMBER}) running in Firebase Setup Mode")
 	print(f"Executing FireSetup on Flutter Project: '{project_name}'")
 	print("Using GoogleSignInClientID:", gclientid)
@@ -137,7 +136,6 @@ def firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireau
 
 
 def facebook_setup(directory, sourceDirectory, fbid, project_name, fbname):
-	print('\n' + SCC*'-')
 	print(f"FireSetup(v{VERSION_NUMBER}) running in FacebookAuth Setup Mode")
 	print(f"Executing FacebookAuthSetup on Flutter Project: '{project_name}'")
 	print("using FacebookAppID:", fbid)
@@ -262,17 +260,29 @@ if(__name__ == '__main__'):
 	project_name = directory.split('\\')[-1]
 	sourceDirectory = os.path.join(cloc, 'src')
 
+	def hasupdates():
+		if(updater.is_update_available()):
+			print(75*'-')
+			print("FireSetup: Update is Available!")
+			print("Execute the Command: 'firesetup update' to Update FireSetup")
+			print(75*'-')
+			return True
+		else:
+			return False
 
-	if(mode == "firebase"):
+
+	if(mode == "init"):
 		#Regular FireSetup
-		pass
-		# firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth)
+		if(not hasupdates()): print('\n' + SCC*'-')
+		firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth)
 	elif(mode == "facebook"):
 		#Facebook FireSetup
+		if(not hasupdates()): print('\n' + SCC*'-')
 		if(fbid == ""):
 			print("Please Provide a FacebookAppID when running in FacebookSetup Mode")
+			print(SCC*'-')
 			exit()
-		# facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)
+		facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)
 	elif(mode == "update"):
 		fireupdate(cloc)
 	else:

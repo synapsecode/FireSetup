@@ -25,9 +25,10 @@ def get_version_from_readme(content):
 def perform_update():
 	raw_md = getRAW('README.md')
 	version = get_version_from_readme(raw_md)
-	print(f"Updating FireSetup from v({VERSION_NUMBER}) -> v({version})")
-	subprocess.call(['git', 'pull'])
-	exit()
+	print("Installing Update...")
+	p = subprocess.Popen('git pull', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+	out, err = p.communicate()
+	print(f"Updated FireSetup from v({VERSION_NUMBER}) -> v({version})")
 
 if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
