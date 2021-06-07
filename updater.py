@@ -30,7 +30,7 @@ def perform_update(cdir):
 	print(f"git {spath}pull")
 	p = subprocess.Popen(f"git {spath}pull", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	out, err = p.communicate()
-	print(out.decode('utf-8')[:-1])
+	# print(out.decode('utf-8')[:-1])
 	print(f"Updated FireSetup from v({VERSION_NUMBER}) -> v({version})")
 
 if(__name__ == '__main__'):
