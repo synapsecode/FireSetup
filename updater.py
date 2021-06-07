@@ -33,7 +33,6 @@ if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
 	parser.add_argument('mode', help="Updater Mode", type=str)
 	args = parser.parse_args()
-	cdir = args.cdir
 	mode = args.mode
 
 	if(mode == 'update'):
