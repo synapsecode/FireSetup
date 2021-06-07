@@ -33,11 +33,11 @@ def perform_update(cdir):
 	if(len(versioning) != 0):
 		version = versioning[0]
 
-	# replace_file(os.path.join(cdir, 'src', 'main_snippet.dart'), raw_main_snippet)
-	# replace_file(os.path.join(cdir, 'src', 'web.html'), raw_web_src)
-	# replace_file(os.path.join(cdir, 'README.md'), raw_readme)
-	# replace_file(os.path.join(cdir, 'firesetup.bat'), raw_fs_bat)
-	# replace_file(os.path.join(cdir, 'firesetup.py'), raw_fs_py)
+	replace_file(os.path.join(cdir, 'src', 'main_snippet.dart'), raw_main_snippet)
+	replace_file(os.path.join(cdir, 'src', 'web.html'), raw_web_src)
+	replace_file(os.path.join(cdir, 'README.md'), raw_readme)
+	replace_file(os.path.join(cdir, 'firesetup.bat'), raw_fs_bat)
+	replace_file(os.path.join(cdir, 'firesetup.py'), raw_fs_py)
 	print(f"Update Successful! FireSetup has been updated from ({VERSION_NUMBER}) -> {version}")
 
 if(__name__ == '__main__'):
