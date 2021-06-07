@@ -1,11 +1,13 @@
+#Global Constants
+VERSION_NUMBER = "0.3.0"
+
+#Imports
 import os
 import sys
 import argparse
+import updater
 
-#Constants
-VERSION_NUMBER = "0.4.0"
 SCC = 75 #SeperatorCharacterCount
-
 
 #Checks if the Current Directory is a Flutter Project
 def is_flutter_project(directory):
@@ -225,6 +227,7 @@ if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
 	parser.add_argument('cloc', help="Current Directory", type= str)
 	parser.add_argument('directory', help="Target Directory", type= str)
+	parser.add_argument('mode', help="The Mode in Which FireSetup Runs", type=str, default="FireSetup")
 	parser.add_argument('--gclientid', '-gcid', help="Google Client ID", type= str)
 	parser.add_argument('--enable_fireauth', '-efa', help="Add FireAuth to Project along With a Template", type= str, default="False")
 	
@@ -238,7 +241,7 @@ if(__name__ == '__main__'):
 	directory = args.directory
 	gclientid = args.gclientid
 	enable_fireauth = True if args.enable_fireauth == "True" else False
-
+	mode = args.mode
 	fbid=args.facebook_app_id
 	fbname = args.facebook_app_name
 
@@ -246,9 +249,30 @@ if(__name__ == '__main__'):
 	project_name = directory.split('\\')[-1]
 	sourceDirectory = os.path.join(cloc, 'src')
 
-	if(fbid == ""):
+
+	if(mode == "firebase"):
 		#Regular FireSetup
-		firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth)
-	else:
+		pass
+		# firesetup(directory, sourceDirectory, gclientid, project_name, enable_fireauth)
+	elif(mode == "facebook"):
 		#Facebook FireSetup
-		facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)
+		if(fbid == ""):
+			print("Please Provide a FacebookAppID when running in FacebookSetup Mode")
+			exit()
+		# facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)
+	elif(mode == "update"):
+		print(SCC*'-')
+		print(f"FireSetup(v{VERSION_NUMBER}) running in Update Mode")
+		print("Checking For Updates...")
+		if(updater.is_update_available()):
+			print("Update Available! Updating the Updater...")
+			raw_updater = updater.getRAW('updater.py')
+			print(raw_updater)
+			#Update updater.py first
+			#Close this & Hand over to updater.py
+			pass
+		else:
+			print("No Update Available")
+		print(SCC*'-')
+	else:
+		print("Invalid Mode")
