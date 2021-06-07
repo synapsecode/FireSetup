@@ -140,6 +140,12 @@ def facebook_setup(directory, sourceDirectory, fbid, project_name, fbname):
 	print(f"Executing FacebookAuthSetup on Flutter Project: '{project_name}'")
 	print("using FacebookAppID:", fbid)
 
+	if(fbid == ""):
+		print(SCC*'-')
+		print("Please Provide a FacebookAppID when running in FacebookSetup Mode")
+		print(SCC*'-')
+		return
+
 	# Check if FireSetup is in a Flutter Project
 	if(not is_flutter_project(directory)):
 		print(SCC*'-')
@@ -149,6 +155,8 @@ def facebook_setup(directory, sourceDirectory, fbid, project_name, fbname):
 		return
 	else:
 		print(SCC*'-')
+
+
 
 	#--------------------------------------------------------------------------------------------------
 
@@ -278,11 +286,7 @@ if(__name__ == '__main__'):
 	elif(mode == "facebook"):
 		#Facebook FireSetup
 		if(not hasupdates()): print('\n' + SCC*'-')
-		if(fbid == ""):
-			print("Please Provide a FacebookAppID when running in FacebookSetup Mode")
-			print(SCC*'-')
-			exit()
-		facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)
+		facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)		
 	elif(mode == "update"):
 		fireupdate(cloc)
 	else:
