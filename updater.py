@@ -1,4 +1,3 @@
-#Latest Update
 from firesetup import VERSION_NUMBER
 import requests
 import os
@@ -47,7 +46,6 @@ if(__name__ == '__main__'):
 	parser.add_argument('mode', help="Updater Mode", type=str)
 	args = parser.parse_args()
 	cdir = args.cdir
-<<<<<<< HEAD
 	mode = args.mode
 
 	if(mode == 'update'):
@@ -63,14 +61,3 @@ if(__name__ == '__main__'):
 			print(75*'-')
 	else:
 		print("Invalid Mode")
-=======
-
-	print("Runnning Update in Path:", cdir)
-
-	if(is_update_available()):
-		print(75*'-')
-		print("FireSetup: Update is Available!")
-		print("Execute the Command: 'firesetup update' to Update FireSetup")
-		print(75*'-')
-		perform_update(cdir)
->>>>>>> dee878e665692c429e8968e8a2ad9527603be3f6
