@@ -223,6 +223,24 @@ def facebook_setup(directory, sourceDirectory, fbid, project_name, fbname):
 	print(SCC*'-')
 
 
+def fireupdate(cdir):
+	print(SCC*'-')
+	print(f"FireSetup(v{VERSION_NUMBER}) running in Update Mode")
+	print("Checking For Updates...")
+	if(updater.is_update_available()):
+		#Update updater.py first
+		print("Update Available! Starting Update...")
+		raw_updater = updater.getRAW('updater.py')
+		updater.replace_file(os.path.join(cdir, 'updater.py'), raw_updater)
+		print("Updated the UpdateEngine")
+		print("Shifting Control from FireSetup -> UpdateEngine")
+		#Close this & Hand over to updater.py
+		pass
+	else:
+		print("No Update Available")
+	print(SCC*'-')
+
+
 if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
 	parser.add_argument('cloc', help="Current Directory", type= str)
@@ -261,18 +279,6 @@ if(__name__ == '__main__'):
 			exit()
 		# facebook_setup(directory, sourceDirectory, fbid, project_name, fbname)
 	elif(mode == "update"):
-		print(SCC*'-')
-		print(f"FireSetup(v{VERSION_NUMBER}) running in Update Mode")
-		print("Checking For Updates...")
-		if(updater.is_update_available()):
-			print("Update Available! Updating the Updater...")
-			raw_updater = updater.getRAW('updater.py')
-			print(raw_updater)
-			#Update updater.py first
-			#Close this & Hand over to updater.py
-			pass
-		else:
-			print("No Update Available")
-		print(SCC*'-')
+		fireupdate(cloc)
 	else:
 		print("Invalid Mode")
