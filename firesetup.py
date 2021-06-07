@@ -236,7 +236,7 @@ def fireupdate(cdir):
 	if(updater.is_update_available()):
 		#Update updater.py first
 		print("Update Available! Starting Update...")
-		updater.perform_update()
+		updater.perform_update(cdir)
 	else:
 		print("No Update Available")
 	print(SCC*'-')

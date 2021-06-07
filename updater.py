@@ -43,11 +43,15 @@ if(__name__ == '__main__'):
 			print(75*'-')
 			perform_update(None)
 			print(75*'-')
+		else:
+			print("No Update Available")
 	elif(mode == 'check'):
 		if(is_update_available()):
 			print(75*'-')
 			print("FireSetup: Update is Available!")
 			print("Execute the Command: 'firesetup update' to Update FireSetup")
 			print(75*'-')
+		else:
+			print("No Update Available")
 	else:
 		print("Invalid Mode")
