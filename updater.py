@@ -27,7 +27,7 @@ def perform_update(cdir):
 	raw_md = getRAW('README.md')
 	version = get_version_from_readme(raw_md)
 	print("Installing Update...")
-	print(f"git {spath}pull")
+	# print(f"git {spath}pull")
 	p = subprocess.Popen(f"git {spath}pull", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	out, err = p.communicate()
 	# print(out.decode('utf-8')[:-1])
