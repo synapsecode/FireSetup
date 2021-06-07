@@ -16,8 +16,9 @@ def getRAW(path):
 	return raw_text
 
 def is_update_available():
-	raw_text = getRAW('README.md')
-	return not (f"({VERSION_NUMBER})" in raw_text)
+	raw_md = getRAW('README.md')
+	raw_fs = getRAW('firesetup.py')
+	return ((f'VERSION_NUMBER = "{VERSION_NUMBER}"' not in raw_fs) and (f"({VERSION_NUMBER})" not in raw_md))
 
 def perform_update(cdir):
 	print("Downloading the Latest Source Files...")
