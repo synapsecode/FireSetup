@@ -1,7 +1,7 @@
 <img src="https://i.ibb.co/9b9sbQS/New-Project.png" align="right">
 
 
-# Flutter FireSetup Utility (0.4.0)
+# Flutter FireSetup Utility (0.3.0)
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 As a bonus, you can integrate my [FireAuth](https://github.com/synapsecode/fireauth) package effortlessly by using this script.
 It uses Python internally
