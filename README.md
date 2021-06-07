@@ -221,12 +221,12 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
   - Keep Clicking Next until you arrive at the KeyHashes Section
   
 #### B) Getting Your Development KeyHashes
-  - **Windows Installation**
+  - **Windows Command**
     - Make Sure you have KeyTool from JDK(Java Development Kit)
     - [Download OpenSSL](https://code.google.com/archive/p/openssl-for-windows/downloads)
     - Execute this code in the Command Line (Note: The KeyStore Password is your Current PC User's password`): ```bash keytool -exportcert -alias androiddebugkey -keystore "C:\Users\<YOUR_USERNAME>\.android\debug.keystore" | " <YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" sha1 -binary | "<YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" base64```
   
-  - **MacOS or Linux Installation**
+  - **MacOS or Linux Command**
     - Execute this code in the Command Line: ```bash keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64```
   - Now Save the output, This will be needeed later
   - **Universal: To Get ReleaseKey (Optional For Now)**
