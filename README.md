@@ -224,13 +224,13 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
   - **Windows Command**
     - Make Sure you have KeyTool from JDK(Java Development Kit)
     - [Download OpenSSL](https://code.google.com/archive/p/openssl-for-windows/downloads)
-    - Execute this code in the Command Line (Note: The KeyStore Password is your Current PC User's password`): ```bash keytool -exportcert -alias androiddebugkey -keystore "C:\Users\<YOUR_USERNAME>\.android\debug.keystore" | " <YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" sha1 -binary | "<YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" base64```
+    - Execute this code in the Command Line (Note: The KeyStore Password is your Current PC User's password`): ```keytool -exportcert -alias androiddebugkey -keystore "C:\Users\<YOUR_USERNAME>\.android\debug.keystore" | " <YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" sha1 -binary | "<YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" base64```
   
   - **MacOS or Linux Command**
-    - Execute this code in the Command Line: ```bash keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64```
+    - Execute this code in the Command Line: ```keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64```
   - Now Save the output, This will be needeed later
   - **Universal: To Get ReleaseKey (Optional For Now)**
-    - Execute this code in the Command Line: ```bash keytool -exportcert -alias <YOUR_RELEASE_KEY_ALIAS> -keystore <YOUR_RELEASE_KEY_PATH> | openssl sha1 -binary | openssl base64```
+    - Execute this code in the Command Line: ```keytool -exportcert -alias <YOUR_RELEASE_KEY_ALIAS> -keystore <YOUR_RELEASE_KEY_PATH> | openssl sha1 -binary | openssl base64```
   - Now Paste the Copied Keys to the Key Hashes Field and click on Save
   - Continue Clicking Next until Instructed Otherwise
   
@@ -253,13 +253,12 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
   
 #### G) Run FireSetup in FacebookSetup Mode
   - Open your Flutter Project in the Terminal
-  - Run this Command: ```batch
-  firesetup -fbid="<YOUR_FACEBOOK_APP_ID>"
-  ```
+  - Run this Command: ```firesetup -fbid="<YOUR_FACEBOOK_APP_ID>"```
   - This should Complete the Facebook Setup!
   
->>>  Note: 🔴  You Need to Setup Facebook for iOS on your own! FireSetup cannot do it for you.
->>> Your Facebook Login App is currently in Development Mode, which means you can only login with the Account used for your Developer Account, To enable Everyone to Login, you need to Switch to Live Mode. Look it up Online.
+> Note: 🔴  You Need to Setup Facebook for iOS on your own! FireSetup cannot do it for you.
+  
+> Your Facebook Login App is currently in Development Mode, which means you can only login with the Account used for your Developer Account, To enable Everyone to Login, you need to Switch to Live Mode. Look it up Online.
   
 ---
 </details>
