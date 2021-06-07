@@ -1,12 +1,11 @@
 #Global Constants
-VERSION_NUMBER = "0.4.0"
+VERSION_NUMBER = "0.3.0"
 
 #Imports
 import os
 import sys
 import argparse
 import updater
-import subprocess
 
 SCC = 75 #SeperatorCharacterCount
 
@@ -231,13 +230,7 @@ def fireupdate(cdir):
 	if(updater.is_update_available()):
 		#Update updater.py first
 		print("Update Available! Starting Update...")
-		raw_updater = updater.getRAW('updater.py')
-		updater.replace_file(os.path.join(cdir, 'updater.py'), raw_updater)
-		print("Updated the UpdateEngine")
-		print("Shifting Control from FireSetup -> UpdateEngine")
-		#HandOver Execution to UpdateEngine & Close this File
-		subprocess.call(['python', 'updater.py', f'"{cdir}"', 'update'])
-		exit()
+		updater.perform_update()
 	else:
 		print("No Update Available")
 	print(SCC*'-')

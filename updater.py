@@ -3,12 +3,7 @@ import requests
 import os
 import re
 import argparse
-
-def replace_file(path, content):
-	with open(path) as f:
-		old_data = f.read()
-		with open(path, 'w') as x:
-			x.write(content)
+import subprocess
 
 def getRAW(path):
 	URL = f"https://github.com/synapsecode/FireSetup/raw/main/{path}"
@@ -20,30 +15,22 @@ def is_update_available():
 	raw_fs = getRAW('firesetup.py')
 	return ((f'VERSION_NUMBER = "{VERSION_NUMBER}"' not in raw_fs) and (f"({VERSION_NUMBER})" not in raw_md))
 
-def perform_update(cdir):
-	print("Downloading the Latest Source Files...")
-	raw_main_snippet = getRAW('src/main_snippet.dart')
-	raw_web_src = getRAW('src/web.html')
-	raw_readme = getRAW('README.md')
-	raw_fs_bat = getRAW('firesetup.bat')
-	raw_fs_py = getRAW('firesetup.py')
-	print("Download Complete! Installing Updates..")
-	#Getting the Version Number
-	versioning = x = re.findall("\(\d.\d.\d\)", raw_readme)
+def get_version_from_readme(content):
+	versioning = x = re.findall("\(\d.\d.\d\)", content)
 	version = VERSION_NUMBER
 	if(len(versioning) != 0):
 		version = versioning[0]
+	return version[1:-1]
 
-	replace_file(os.path.join(cdir, 'src', 'main_snippet.dart'), raw_main_snippet)
-	replace_file(os.path.join(cdir, 'src', 'web.html'), raw_web_src)
-	replace_file(os.path.join(cdir, 'README.md'), raw_readme)
-	replace_file(os.path.join(cdir, 'firesetup.bat'), raw_fs_bat)
-	replace_file(os.path.join(cdir, 'firesetup.py'), raw_fs_py)
-	print(f"Update Successful! FireSetup has been updated from ({VERSION_NUMBER}) -> {version}")
+def perform_update():
+	raw_md = getRAW('README.md')
+	version = get_version_from_readme(raw_md)
+	print(f"Updating FireSetup from v({VERSION_NUMBER}) -> v({version})")
+	subprocess.call(['git', 'pull'])
+	exit()
 
 if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
-	parser.add_argument('cdir', help="Current Directory", type= str)
 	parser.add_argument('mode', help="Updater Mode", type=str)
 	args = parser.parse_args()
 	cdir = args.cdir
@@ -52,7 +39,7 @@ if(__name__ == '__main__'):
 	if(mode == 'update'):
 		if(is_update_available()):
 			print(75*'-')
-			perform_update(cdir)
+			perform_update()
 			print(75*'-')
 	elif(mode == 'check'):
 		if(is_update_available()):
