@@ -23,13 +23,14 @@ def get_version_from_readme(content):
 	return version[1:-1]
 
 def perform_update(cdir):
-	spath = f'-C "{cdir}" ' if cdir != None else ''
+	spath = f'-C "{cdir[:-1]}" ' if cdir != None else ''
 	raw_md = getRAW('README.md')
 	version = get_version_from_readme(raw_md)
 	print("Installing Update...")
+	print(f"git {spath}pull")
 	p = subprocess.Popen(f"git {spath}pull", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	out, err = p.communicate()
-	# print(out.decode('utf-8')[:-1])
+	print(out.decode('utf-8')[:-1])
 	print(f"Updated FireSetup from v({VERSION_NUMBER}) -> v({version})")
 
 if(__name__ == '__main__'):
