@@ -28,6 +28,7 @@ def perform_update():
 	print("Installing Update...")
 	p = subprocess.Popen('git pull', stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 	out, err = p.communicate()
+	print(out.decode('utf-8')[:-1])
 	print(f"Updated FireSetup from v({VERSION_NUMBER}) -> v({version})")
 
 if(__name__ == '__main__'):
