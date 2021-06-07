@@ -236,7 +236,7 @@ def fireupdate(cdir):
 		print("Updated the UpdateEngine")
 		print("Shifting Control from FireSetup -> UpdateEngine")
 		#HandOver Execution to UpdateEngine & Close this File
-		subprocess.run(f'python updater.py "{cdir}" update', shell=True)
+		subprocess.call(['python', 'updater.py', f'"{cdir}"', 'update'])
 		exit()
 	else:
 		print("No Update Available")
