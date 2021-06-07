@@ -205,7 +205,61 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
 - Now go back to the Microsoft AuthProvider Dialog and paste the Application (client) ID and the Client Secret in the required fields and Click on Save!
 - The Setup is Done! Now you can use Microsoft Authentication!
   
-  
+---
 </details> 
 
+<details><summary>🟢 Facebook</summary>
+
+#### A) Create a Facebook App using the [Facebook Developer Page](https://developers.facebook.com)
+  - Create a Facebook Developer Account or convert your existing account into a Developer Account
+  - Click on Create App, Select Continue and Click Continue, fill in the necessary details and proceed
+  - In the Dashboard, Click on 'Set Up' under the Facebook Login Section and click on Android
+  - Now, Keep Clicking Next until instructed otherwise
+  - Under 'Tell Us about Your Android Project', 
+    - Add your Android Project's package name (see from AndroidManifest.xml)
+    - Add **<your_package_name>.MainActivity** for DefaultActivityClassName and click 'Save'. In the dialog that pops up, Click 'Use this package name'
+  - Keep Clicking Next until you arrive at the KeyHashes Section
+  
+#### B) Getting Your Development KeyHashes
+  - **Windows Installation**
+    - Make Sure you have KeyTool from JDK(Java Development Kit)
+    - [Download OpenSSL](https://code.google.com/archive/p/openssl-for-windows/downloads)
+    - Execute this code in the Command Line (Note: The KeyStore Password is your Current PC User's password`): ```bash keytool -exportcert -alias androiddebugkey -keystore "C:\Users\<YOUR_USERNAME>\.android\debug.keystore" | " <YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" sha1 -binary | "<YOUR_PATH_TO_OPENSSL_LIBRARY>\bin\openssl" base64```
+  
+  - **MacOS or Linux Installation**
+    - Execute this code in the Command Line: ```bash keytool -exportcert -alias androiddebugkey -keystore ~/.android/debug.keystore | openssl sha1 -binary | openssl base64```
+  - Now Save the output, This will be needeed later
+  - **Universal: To Get ReleaseKey (Optional For Now)**
+    - Execute this code in the Command Line: ```bash keytool -exportcert -alias <YOUR_RELEASE_KEY_ALIAS> -keystore <YOUR_RELEASE_KEY_PATH> | openssl sha1 -binary | openssl base64```
+  - Now Paste the Copied Keys to the Key Hashes Field and click on Save
+  - Continue Clicking Next until Instructed Otherwise
+  
+#### C) Retrieve Your FacebookAppID
+  - Under 'Edit Your Resources and Manifest', copy the value of facebook_app_id and save it somewhere, this will be needed later.
+  - Do not Edit anything, Just Continue, The Manual Editing Work will be handled by FireSetup automatically
+  - Keep Clicking Next and once you have reached the end, Close the Page!
+  
+#### D) Retrieve Your AppID and AppSecret from Facebook Login Settings
+  - From the Dashboard, Go to the FB App Settings
+  - Copy the AppID and AppSecret and save it somewhere, this is needed later 
+ 
+#### E) Enable the Facebook SignIn Provider on the Firebase Console
+  - Enable Facebook Authentication
+  - Paste the AppID & App Secret in the respective fields
+  - Copy the callbackURL (or) redirectURL and save it somewhere & Click on Continue
+ 
+#### F) Register the RedirectURL in the Facebook Login Settings
+  - Go to your FB Login Settings and paste the callbackURL in Valid OAuth Redirect URLs
+  
+#### G) Run FireSetup in FacebookSetup Mode
+  - Open your Flutter Project in the Terminal
+  - Run this Command: ```batch
+  firesetup -fbid="<YOUR_FACEBOOK_APP_ID>"
+  ```
+  - This should Complete the Facebook Setup!
+  
+>>>  Note: 🔴  You Need to Setup Facebook for iOS on your own! FireSetup cannot do it for you.
+>>> Your Facebook Login App is currently in Development Mode, which means you can only login with the Account used for your Developer Account, To enable Everyone to Login, you need to Switch to Live Mode. Look it up Online.
+  
 ---
+</details>
