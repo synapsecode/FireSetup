@@ -1,7 +1,7 @@
 <img src="https://i.ibb.co/9b9sbQS/New-Project.png" align="right">
 
 
-# Flutter FireSetup Utility (0.5.0)
+# Flutter FireSetup Utility (0.4.0)
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 As a bonus, you can integrate my [FireAuth](https://github.com/synapsecode/fireauth) package effortlessly by using this script.
 It uses Python internally
@@ -34,45 +34,39 @@ cd testapp
 ---
 
 ### 🟡 Step 2: Create a Firebase Project (or) Open an Existing One
-  ```
   Use the Firebase Console to do this! It's very straightforward
-  ```
   
  ---
  
 ### 🟡 Step 3: Add an Android App in Firebase Console
-  ```
-  ○ Register the App
-  ○ Save the google_services.json file in android/app
-  ○ Click Next and do not proceed with editing any other files as This will be done by FireSetup
-  ```
+  - Register the App
+  - Save the google_services.json file in android/app
+  - Click Next and do not proceed with editing any other files as This will be done by FireSetup
 
 ---
 
 ### 🟡 Step 4: Add Web App in Firebase Console
-  ```
-  ○ Register the App
-  ○ From the code snippet provided by firebase, just copy the firebaseConfig object and save it somewhere
-  ○ Click Next and do not proceed with editing any other files as This will be done by FireSetup
-  ```
+  - Register the App
+  - From the code snippet provided by firebase, just copy the firebaseConfig object and save it somewhere
+  - Click Next and do not proceed with editing any other files as This will be done by FireSetup
  
 ---
 
 ### 🟡 Step 5: Run FireSetup
   * Inside your flutter project, open cmd and enter this command (assuming you have installed FireSetup Correctly):
 
-  ```batch
-  firesetup -gcid="<YOUR_GOOGLE_SIGNIN_CLIENTID>" -efa="True"
+  ```bash
+  firesetup init -gcid=YOUR_GOOGLE_SIGNIN_ID -efa=True
   ```
   
-  * The **-gcid** flag is useful for GoogleSignIn on the Web **(optional)**
-  * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth **(optional)**
+  * The **-gcid** flag is useful for GoogleSignIn on the Web
+  * The **-efa** flag stands for Enable FireAuth and if true, it adds the [FireAuth](https://github.com/synapsecode/fireauth) package to pubspec.yaml and replaces your main.dart file with an example snippet of how to use FireAuth
+ > The Arguements are Completely Optional
 
 ### 🟡 Step 5.1: Add firebaseConfig to Web
-  ```
-  ○ Open the flutter project using an IDE like VSCode for example
-  ○ Go to the /web/index.html file and replace the firebaseConfig object there with the one you copied when adding the webApp
-  ```
+  - Open the flutter project using an IDE like VSCode for example
+  - Go to the /web/index.html file and replace the firebaseConfig object there with the one you copied when adding the webApp
+
 ---
 
 ### 🟡 Step 6: Enable Authentication Methods
@@ -253,12 +247,21 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
   
 #### G) Run FireSetup in FacebookSetup Mode
   - Open your Flutter Project in the Terminal
-  - Run this Command: ```firesetup -fbid="<YOUR_FACEBOOK_APP_ID>"```
+  - Run FireSetup in FacebookSetup Mode using this command: ```firesetup facebook -fbid=YOUR_FB_APP_ID```
   - This should Complete the Facebook Setup!
   
 > Note: 🔴  You Need to Setup Facebook for iOS on your own! FireSetup cannot do it for you.
   
 > Your Facebook Login App is currently in Development Mode, which means you can only login with the Account used for your Developer Account, To enable Everyone to Login, you need to Switch to Live Mode. Look it up Online.
   
----
 </details>
+  
+---
+  
+### 🔵 Updating FireSetup
+  After v0.4.0, FireSetup comes bundled with an UpdateEngine. It will let you know if a new update is available at anytime! It usually checks this before running your firesetup command!
+  
+  - Make Sure you have git installed (Should be done if you were able to install firesetup)
+  - Run this command: ```firesetup update```
+    
+---
