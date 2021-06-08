@@ -1,5 +1,5 @@
 #Global Constants
-VERSION_NUMBER = "0.5.0"
+VERSION_NUMBER = "0.4.0"
 
 #Imports
 import os
