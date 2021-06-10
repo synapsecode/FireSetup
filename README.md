@@ -263,5 +263,6 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
   
   - Make Sure you have git installed (Should be done if you were able to install firesetup)
   - Run this command: ```firesetup update```
+  - Done! Your FireSetup should now be upgraded to the latest stable version
     
 ---
