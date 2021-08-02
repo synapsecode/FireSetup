@@ -1,7 +1,7 @@
 <img src="https://i.ibb.co/9b9sbQS/New-Project.png" align="right">
 
 
-# Flutter FireSetup Utility (0.4.0)
+# Flutter FireSetup Utility (0.5.0)
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 As a bonus, you can integrate my [FireAuth](https://github.com/synapsecode/fireauth) package effortlessly by using this script.
 It uses Python internally
@@ -255,7 +255,25 @@ To use Google SignIn, Phone SignIn and the other Social SignIn Methods, follow t
 > Your Facebook Login App is currently in Development Mode, which means you can only login with the Account used for your Developer Account, To enable Everyone to Login, you need to Switch to Live Mode. Look it up Online.
   
 </details>
+
+<details><summary>🟢 Yahoo (OAuth)</summary>
   
+#### A) Copy the Firebase Redirect URI
+  - Open the Firebase Console, Go to Authentication > Sign-in method, Click on Yahoo, enable it and copy the Redirect URI.
+  
+#### B) Go to the Yahoo Developer Create App Page
+  - Go to the [Yahoo Developer Create App Page](https://developer.yahoo.com/apps/create) in another tab and Login with your Yahoo account
+  
+#### C) Fill Details & Create App
+  - Fill the App Details on the Create App page and paste the Redirect URI that you copied from Firebase and then Click Create App
+  
+#### D) Save Secrets to Firebase Console
+  - Now in the page that appears, Copy ClientID and Client Secret and go back to the Firebase Console tab and paste in the appropriate textfield under the Yahoo Sign In Method and Click on Save
+  
+Now you should be able to use Yahoo Sign In easily! Note: Currently, Firebase Users from Yahoo only have their UID filled, all the other fields like email, displayName etc are null.
+  
+</details>
+
 ---
   
 ### 🔵 Updating FireSetup
