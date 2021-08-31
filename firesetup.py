@@ -6,7 +6,14 @@ from firesetup_code.firebaseinit import firebaseinit
 from firesetup_code.authinit import authinit
 from firesetup_code.helperfunctions import error, AUTH_PROVIDERS, warning
 
-SCC = 75 #SeperatorCharacterCount
+VERSION_NUMBER = '1.0.0'
+
+def headertext(mode):
+	print(f'\n============== [ FireSetup v{VERSION_NUMBER} ({mode} Mode) ] ==============\n')
+
+def footertext(mode):
+	extras = 4 if mode == 'Firebase' else 0
+	print(f'\n==========================={"="*(extras//2)} [ .... ] {"="*(extras//2)}=========================\n')
 
 if(__name__ == '__main__'):
 	parser = argparse.ArgumentParser()
@@ -36,12 +43,17 @@ if(__name__ == '__main__'):
 	}
 
 	if(mode == 'firebase'):
+		headertext('Firebase')
 		firebaseinit(source=sloc, target=directory, platforms=platforms)
+		footertext('Firebase')
 	elif(mode == 'auth'):
 		authproviders = ("[ALL]" if args.all else args.providers)
+		headertext('Auth')
 		authinit(source=sloc, target=directory, providers=authproviders, platforms=platforms)
+		footertext('Auth')
 	else:
 		print(error("Invalid Mode for FireSetup"))
+
 
 
 

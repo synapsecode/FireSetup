@@ -1,5 +1,5 @@
 from sys import platform
-from firesetup_code.helperfunctions import AUTH_PROVIDERS, authprovider_setupcheck, error, firesetup_usecheck, get_platform_string, get_provider_string, header, info, is_macos, success, warning
+from firesetup_code.helperfunctions import AUTH_PROVIDERS, authprovider_setupcheck, error, firesetup_usecheck, get_platform_string, get_provider_string, header, info, is_firebase_added, is_macos, success, warning
 import re
 import os
 from firesetup_code.templates import generate_fb_sdk_manifest, generate_fb_secrets_file, generate_ios_plist_template
@@ -8,10 +8,10 @@ def android_auth_setup(source, target, providers, data):
 
     #Check for Existing Setup (Facebook)
     if(authprovider_setupcheck(target, 'android', {})):
-        print(warning("⚠️  AuthProviders already implemented in the Android Codebase"))
+        print(warning("  ⚠️  AuthProviders already implemented in the Android Codebase"))
         return
 
-    print("Adding AuthProvider Support to Android Codebase")
+    print("  Adding AuthProvider Support to Android Codebase")
     # ---------------- Generate Facebook XML Strings -------------------
     if(providers.get('facebook')):
         with open(os.path.join(target, 'android', 'app', 'src', 'main', 'res', 'values', 'strings.xml'), 'w') as f:
@@ -54,17 +54,16 @@ def ios_auth_setup(source, target, providers, data):
     rev_cid_regex = "<key>REVERSED_CLIENT_ID<\/key>\n\t<string>com\.googleusercontent\.apps\.\d+-\w+<\/string>"
     with open(google_service_plist_location) as f:
         src = f.read()
-        rev_cid_regex = "<key>REVERSED_CLIENT_ID<\/key>\n\t<string>com\.googleusercontent\.apps\.\d+-\w+<\/string>"
         match = re.search(rev_cid_regex, src).group(0)
         reversed_client_id = match.split('\n')[1][9:-9]
         # print("reversed_client_id:", reversed_client_id)
 
     #Check for Existing AuthProvider Code
     if(authprovider_setupcheck(target, 'ios', {'revcid': reversed_client_id})):
-        print(warning("⚠️  AuthProviders already implemented in the iOS Codebase"))
+        print(warning("  ⚠️  AuthProviders already implemented in the iOS Codebase"))
         return
 
-    print("Adding AuthProvider Support to iOS Codebase")
+    print("  Adding AuthProvider Support to iOS Codebase")
     print(success("    👉 Extracted ReversedClientID from GoogleServices-Info.plist"))
 
     #------------------- Updating Info.plist with CFBundleURLSchemes -------------
@@ -86,10 +85,10 @@ def web_auth_setup(source, target, providers, data):
 
     #Check for previous use
     if(authprovider_setupcheck(target, 'web', {})):
-        print(warning("⚠️  AuthProviders already implemented in the Web Codebase"))
+        print(warning("  ⚠️  AuthProviders already implemented in the Web Codebase"))
         return
 
-    print("Adding AuthProvider Support to Web Codebase")
+    print("  Adding AuthProvider Support to Web Codebase")
     gcid = data.get('google_web')
 
     # ------------ Replace GoogleSignInClientID -----------------
@@ -98,7 +97,7 @@ def web_auth_setup(source, target, providers, data):
         newsrc = src.replace(
             'GCLIENTID',
             gcid,
-        )
+        ).replace('PROJECT_TITLE', data.get('project_name'))
         with open(os.path.join(target, 'web', 'index.html'), 'w') as x:
             x.write(newsrc)
         if(gcid != None):
@@ -111,8 +110,8 @@ def web_auth_setup(source, target, providers, data):
 def authsetup(source, target, providers, platforms, data):
     pString = get_provider_string(providers)
     platform_string = get_platform_string(platforms)
-    print(f"Adding Code to enable {info(pString)} Login")
-    print(f"Platform: {header(platform_string)}")
+    print(f"  AuthProviders: {header(pString)}")
+    print(f"  Platform: {header(platform_string)}")
 
     if(platforms['android'] or platforms['universal']):
         android_auth_setup(source, target, providers, data=data)
@@ -121,10 +120,9 @@ def authsetup(source, target, providers, platforms, data):
     if(platforms['web'] or platforms['universal']):
         web_auth_setup(source, target, providers, data=data)
 
-    print(success("🔥 AuthProvider Implementation Successful!"))
+    print(success("  🔥 AuthProvider Implementation Successful!"))
 
     #TODO: Display the Further Instructions
-    
 
 
 def authinit(source, target, providers, platforms):
@@ -134,23 +132,14 @@ def authinit(source, target, providers, platforms):
         return [fbid, fbct]
 
     def getGCIDFromUser():
-        gcid = str(input("  🔧 Enter your GoogleSignIn Client ID: "))
+        gcid = str(input("  🔧 Enter your GoogleSignInClientID (Flutter Web): "))
         return gcid
 
     project_name = target.split('/' if is_macos else '\\')[-1]
 
-    if(platforms['android'] or platforms['universal']):
-        if(not firesetup_usecheck(target, 'android')):
-            print(error("❌ Firebase not added to Android Project! (run 'firesetup firebase -a')"))
-            return
-    if(platforms['ios'] or platforms['universal']):
-        if(not firesetup_usecheck(target, 'ios')):
-            print(error("❌ Firebase not added to iOS Project! (run 'firesetup firebase -i')"))
-            return
-    if(platforms['web'] or platforms['universal']):
-        if(not firesetup_usecheck(target, 'web')):
-            print(error("❌ Firebase not added to Web Project! (run 'firesetup firebase -w')"))
-            return
+    #Stop if Firebase is not added
+    if(not is_firebase_added(platforms, target)):
+        return
     
     if(providers == '[ALL]'): #RootMode   
         data = {
@@ -158,6 +147,7 @@ def authinit(source, target, providers, platforms):
             'project_name': project_name,
             'google_web': getGCIDFromUser() if (platforms['web'] or platforms['universal']) else None
         }
+        print() #Add Space between data input and firesetup output
         authsetup(source, target, providers={
             'google': True,
             'facebook': True,
@@ -169,6 +159,8 @@ def authinit(source, target, providers, platforms):
             'project_name': project_name,
             'google_web': getGCIDFromUser() if (platforms['web'] or platforms['universal']) else None
         }
+        if(data.get('google_web') != None):
+            print() #Spacer between Data Entry and firesetup output
         authsetup(source, target, providers={}, platforms=platforms, data=data)
     else:
         provider_list = providers[1: len(providers)-1].split(',')
@@ -177,7 +169,7 @@ def authinit(source, target, providers, platforms):
             if(p in ["Email", "Google", "OAuth2", "Anonymous"]):
                 print(warning(f"'{p}' is a default AuthProvider"))
             elif(p not in AUTH_PROVIDERS):
-                print(warning(f'Unsupported AuthProvider: {p} (ignored)'))
+                print(warning(f'  Unsupported AuthProvider: {p} (ignored)'))
         providers = {
             'google': True,
             'oauth2': True,
@@ -188,6 +180,8 @@ def authinit(source, target, providers, platforms):
             'google_web': getGCIDFromUser() if (platforms['web'] or platforms['universal']) else None,
             'facebook': getFacebookDataFromUser() if providers.get('facebook') else None,
         }
+        if((data.get('google_web') != None) or (data.get('facebook') != None)):
+            print() #Spacer between Data Entry and firesetup output
         authsetup(source, target, providers=providers, platforms=platforms, data=data)
         
 

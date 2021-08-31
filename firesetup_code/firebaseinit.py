@@ -4,9 +4,9 @@ from firesetup_code.helperfunctions import *
 def android_setup(source, targetdir):  
     #Check if changes already made
     if(firesetup_usecheck(targetdir, 'android')):
-        print(warning("⚠️  Firebase has already been added to the Android Project"))
+        print(warning("  ⚠️  Firebase has already been added to the Android Project"))
     else:
-        print("Adding Firebase to Android Codebase")
+        print("  Adding Firebase to Android Codebase")
         # ----------------- Update Project Level Gradle ----------------
         with open(os.path.join(targetdir, 'android', 'build.gradle')) as f:
             src = f.read()
@@ -64,9 +64,9 @@ def android_setup(source, targetdir):
 def ios_setup(source, targetdir):
     #Check if changes already made
     if(firesetup_usecheck(targetdir, 'ios')):
-        print(warning("⚠️  Firebase has already been added to the iOS Codebase"))
+        print(warning("  ⚠️  Firebase has already been added to the iOS Codebase"))
     else:
-        print("Adding Firebase to iOS Codebase")
+        print("  Adding Firebase to iOS Codebase")
         # ---------------------- Updating iOS Deployment Target ----------------
         pbxproj_location = os.path.join(targetdir, 'ios', 'Runner.xcodeproj', 'project.pbxproj')
         with open(pbxproj_location) as f:
@@ -85,9 +85,9 @@ def ios_setup(source, targetdir):
 
 def web_setup(source, targetdir, project_name):
     if(firesetup_usecheck(targetdir, 'web')):
-        print(warning("⚠️  Firebase has already been added to the Web Codebase"))
+        print(warning("  ⚠️  Firebase has already been added to the Web Codebase"))
     else:
-        print("Adding Firebase to Web Codebase")
+        print("  Adding Firebase to Web Codebase")
         # ----------------------- Replacing web/index.html -------------------
         with open(os.path.join(targetdir, 'web', 'index.html'), 'w+') as f:
             with open(os.path.join(source, 'web_template.html')) as g:
@@ -104,19 +104,19 @@ def firebaseinit(source, target, platforms):
 
     #Check if the target is a flutter directory or not
     if(not flutter_dircheck(target)):
-        print(error("❌ Current directory is not a flutter project"))
-        exit(0)
+        print(error("  ❌ Current directory is not a flutter project"))
+        return
     else:
-        print(f"Adding Firebase to Flutter Project: " + header(project_name))
-        print(f"Target Platforms: {header(platform_string)}")
+        print(f"  Target Flutter Project: " + header(project_name))
+        print(f"  Target Platforms: {header(platform_string)}")
 
     #Check for missing GoogleService files
     googleservice_missing_platforms = get_platforms_missing_google_service(targetdir=target, platforms=platforms)
     if('android' in googleservice_missing_platforms):
-        print(warning('⚠️  google_services.json file not found in ./android/app'))
+        print(warning('  ⚠️  google_services.json file not found in ./android/app'))
     if('ios' in googleservice_missing_platforms):
-        print(error('❌ GoogleService-Info.plist file not found in ./ios/Runner'))
-        exit(0)
+        print(error('  ❌ GoogleService-Info.plist file not found in ./ios/Runner'))
+        return
 
     #Run the Setup files
     if(platforms['android'] or platforms['universal']):
@@ -125,5 +125,5 @@ def firebaseinit(source, target, platforms):
         ios_setup(source, target)
     if(platforms['web'] or platforms['universal']):
         web_setup(source, target, project_name)
-    print(success("🔥 Firebase has been added to your Flutter project successfully!"))
+    print(success("  🔥 Firebase has been added to your Flutter project successfully!"))
 

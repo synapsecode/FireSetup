@@ -107,3 +107,19 @@ def is_macos():
 
 
 AUTH_PROVIDERS = ['Facebook']
+
+
+def is_firebase_added(platforms, target):
+	if(platforms['android'] or platforms['universal']):
+		if(not firesetup_usecheck(target, 'android')):
+			print(error("  ❌ Firebase not added to Android Project! (run 'firesetup firebase -a')"))
+			return False
+	if(platforms['ios'] or platforms['universal']):
+		if(not firesetup_usecheck(target, 'ios')):
+			print(error("  ❌ Firebase not added to iOS Project! (run 'firesetup firebase -i')"))
+			return False
+	if(platforms['web'] or platforms['universal']):
+		if(not firesetup_usecheck(target, 'web')):
+			print(error("  ❌ Firebase not added to Web Project! (run 'firesetup firebase -w')"))
+			return False
+	return True
