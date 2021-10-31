@@ -6,7 +6,7 @@ from firesetup_code.firebaseinit import firebaseinit
 from firesetup_code.authinit import authinit
 from firesetup_code.helperfunctions import error, AUTH_PROVIDERS, warning
 
-VERSION_NUMBER = '1.0.0'
+VERSION_NUMBER = '1.0.1'
 
 def headertext(mode):
 	print(f'\n============== [ FireSetup v{VERSION_NUMBER} ({mode} Mode) ] ==============\n')

@@ -3,7 +3,7 @@
   
   
 
-# Flutter FireSetup Utility (1.0.0)
+# Flutter FireSetup Utility (1.0.1)
 
 A Simple Automated way of Adding Firebase to your flutter project! Makes the process easy as you do not need to individually go into each file and add code snippets! The script takes care of that for you!
 
@@ -493,7 +493,7 @@ Now you should be able to use Yahoo Sign In easily! Note: Currently, Firebase Us
 
 ### 🔵 Updating FireSetup
 
-v0.4.0 & v0.5.0 came with an inbuilt update feature. v1.0.0 will be removing this feature as it is a drastic rewrite. A new updater may be bundled in a future release of FireSetup. 
+v0.4.0 & v0.5.0 came with an inbuilt update feature. v1.0.1 will be removing this feature as it is a drastic rewrite. A new updater may be bundled in a future release of FireSetup. 
 
 For now, if you need a new version of firesetup, you need to git clone it from this repository
   

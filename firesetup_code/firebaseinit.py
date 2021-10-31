@@ -11,9 +11,12 @@ def android_setup(source, targetdir):
         with open(os.path.join(targetdir, 'android', 'build.gradle')) as f:
             src = f.read()
             newsrc = src.replace(
-            'classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"',
-            'classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"\n\t\tclasspath \'com.google.gms:google-services:4.3.5\''
-            )
+                'classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"',
+                'classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"\n\t\tclasspath \'com.google.gms:google-services:4.3.5\''
+            ).replace(
+                "ext.kotlin_version = '1.3.50'",
+                "ext.kotlin_version = '1.4.32'"
+            ) #Replacing the Kotlin Version for fireauth 0.7.0 and greater
             with open(os.path.join(targetdir, 'android', 'build.gradle'), 'w') as x:
                 x.write(newsrc)
         print(success("    👉 Updated project level build.gradle"))
